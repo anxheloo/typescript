@@ -1,0 +1,6 @@
+1.In vanilla javascript project we first installed typescript using: npm i typescript -g.
+2.Than we create the main.ts file and enter our code. To compile it into javascript we use tsc main.ts.
+3.We link the script of main.js to our html file.
+4.Once we change something into our main.ts file, we have to recompile it. To automatically watch any change, we use: tsc main.ts -w. 5. We enter: tsc --init to initialize tsconfig.json file and go to the "rootDir": and specify the root of the ts file in our case we have it inside src folder in the root: "rootDir": "./src" .Than we specify the "outDir": "./build/js" , in our case we have the js file that will be compiled inside build folder , inside js folder. Than we simply run tsc -w to watch changes.
+5.To prevent typescript file being created and compiled into js file but outside the src folder, we specify in the tsconfig by using : "include": ["src"]
+6.To prevent compiling ts to js file on error, we use : "noEmitOnError": true
