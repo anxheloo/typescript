@@ -46,11 +46,20 @@ const exampleObj = {
 };
 
 // Here we create a type Object and specify its property types. By using "?", we make the property optional
+
 type Guitarist = {
   name: string;
   active?: boolean;
   albums: (string | number)[];
 };
+
+// WE can also use interface same as type, will talk on upcomming lessons.
+
+// interface Guitarist {
+//   name: string;
+//   active?: boolean;
+//   albums: (string | number)[];
+// };
 
 let myObject: Guitarist = {
   name: "Eddie",
@@ -71,7 +80,6 @@ const greetGuitarist = (guitarist: Guitarist) => {
 greetGuitarist(myObject);
 
 // ENUMS
-
 enum Grade {
   U = 1,
   D,
