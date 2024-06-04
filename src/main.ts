@@ -1,83 +1,62 @@
-// -------------------------------
-// WORKING WITH ARRAYS IN TS
-// -------------------------------
-let stringArr = ["one", "hey", "Anxhelo"];
+// TYPE ALIASES - we can define the variable types and save it in a variable to use as we are doing below.
 
-let guitars = ["Strat", "Les Paul", 5150];
+type stringOrNumber = string | number;
 
-let mixedData = ["EVH", 1985, true];
+type stringOrNumberArray = (string | number)[];
 
-// The first array only accepts strings
-stringArr[0] = "John";
-stringArr.push("hey");
-
-// The second array accepts strings or numbers
-guitars[0] = 1984;
-guitars.unshift("Jim");
-
-// The third array accepts strings, numbers and booleans
-mixedData = guitars;
-
-// Any time of data can go into this array cuz we havent specify anything
-let test = [];
-
-// This is specified to accepts strings
-let bands: string[] = [];
-bands.push("halo");
-
-// In this way we have more control over our datas and order of them.
-let myTuple: [string, number, boolean] = ["Dave", 42, true];
-
-// In this way we specift the types of data our array accepts.
-let myTuple2: (string | number | boolean)[] = [42, "Dave", true];
-
-// -------------------------------
-// OBJECTS
-// -------------------------------
-
-let myObj: object;
-
-// Is okej, cuz array is an object type
-myObj = [];
-
-const exampleObj = {
-  prop1: "Dave",
-  prop2: true,
-};
-
-// Here we create a type Object and specify its property types. By using "?", we make the property optional
 type Guitarist = {
-  name: string;
+  name?: string;
   active?: boolean;
-  albums: (string | number)[];
+  albums: stringOrNumberArray;
 };
 
-let myObject: Guitarist = {
-  name: "Eddie",
-  active: false,
-  albums: [1990, 5150, "OUCABONE"],
+// Literal types
+let myName: "Dave";
+
+let username: "Dave" | "John" | "Amy";
+username = "Amy";
+
+//  functions
+const add = (a: number, b: number): number => {
+  return a + b;
 };
 
-// Here we dont use the second prop of the Guitarist type.
-let myObject2: Guitarist = {
-  name: "Rimi",
-  albums: [1290, 550, "MIR"],
+// Function that doesnt return anything
+const logMsg = (message: any): void => {
+  console.log(message);
 };
 
-const greetGuitarist = (guitarist: Guitarist) => {
-  console.log(`Hello ${guitarist.name}`);
+logMsg(add(2, 3));
+
+// We can use type with functions
+type mathFunction = (a: number, b: number) => number;
+const multiply: mathFunction = (a, b) => {
+  return a * b;
 };
 
-greetGuitarist(myObject);
+logMsg(multiply(3, 3));
 
-// ENUMS
+// Optional Parameter
+const addAll = (a: number, b: number, c?: number): number => {
+  if (c !== undefined) {
+    return a + b + c;
+  }
 
-enum Grade {
-  U = 1,
-  D,
-  C,
-  B,
-  A,
-}
+  return a + b;
+};
 
-console.log(Grade.U);
+console.log(addAll(3, 3, 3));
+console.log(addAll(3, 3));
+
+// Default param value
+const sumAll = (a: number, b: number, c: number = 2): number => {
+  return a + b + c;
+};
+logMsg(sumAll(2, 2, 2));
+logMsg(sumAll(2, 2));
+
+// Rest Parameters
+const total = (...nums: number[]): number => {
+  return nums.reduce((prev, curr) => prev + curr);
+};
+logMsg(total(1, 2, 3, 4));
